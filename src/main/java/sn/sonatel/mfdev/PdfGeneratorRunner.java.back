@@ -1,0 +1,32 @@
+package sn.sonatel.mfdev;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+import sn.sonatel.mfdev.domain.Stagiaire;
+import sn.sonatel.mfdev.service.PdfGenerateService;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Component
+public class PdfGeneratorRunner implements CommandLineRunner {
+
+    @Autowired
+    private PdfGenerateService pdfGenerateService;
+
+    @Override
+    public void run(String... args) throws Exception {
+
+        intern.setId(1L);
+        intern.setNom("Fall");
+        intern.setPrenom("Mouhamed");
+        intern.setEmail("amedmaty1999@mail.com");
+        intern.setNumeroTelephone(784788219);
+        data.put("intern", intern);
+
+        pdfGenerateService.generatePdfFile("quotation", data, intern.getNom()+"_"+intern.getPrenom()+".pdf");
+    }
+}

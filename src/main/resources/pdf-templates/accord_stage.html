@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accord de stage</title>
+  </head>
+  <body>
+    <p style="font-size: 10px; color: #222222; font-style: inherit">
+      *************************** <br /><br />
+      Sonatel:Scan antiviral effectue (1)<br /><br />
+      Courriel externe : Ce message provient de l'extérieur de SONATEL. Evitez de cliquer sur tout lien ou pièce jointe à moins d'en
+      reconnaître l'expéditeur !<br /><br />
+      ***************************<br />
+    </p>
+    <p>Bonjour , <span th:text="${intern.prenom}" /></p>
+    <br />
+    <p>
+      Faisant suite à votre demande de stage, nous avons le plaisir de vous informer que votre candidature a été retenue.<br />
+      Il s'agira d'un stage <span th:text="${intern.typeStage}" />de <span th:text="${duree}" /> mois à partir du mois de
+      <span th:text="${mois}" />.<br />
+    </p>
+    <p>
+      <strong>
+        Merci de remplir le formulaire ci-joint pour confirmer votre disponibilité et de nous envoyer par la même occasion
+        <span style="color: red"> votre certificat d'inscription de l'année en cours.</span>
+      </strong>
+    </p>
+    <p>En pièce jointe également la fiche de renseignement qui vous permettra de vous informer sur les modalités de votre stage.</p>
+  </body>
+</html>

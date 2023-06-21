@@ -19,10 +19,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import sn.sonatel.mfdev.config.Constants;
+import sn.sonatel.mfdev.domain.Manager;
 import sn.sonatel.mfdev.domain.User;
 import sn.sonatel.mfdev.repository.UserRepository;
 import sn.sonatel.mfdev.security.AuthoritiesConstants;
 import sn.sonatel.mfdev.service.MailService;
+import sn.sonatel.mfdev.service.ManagerService;
 import sn.sonatel.mfdev.service.UserService;
 import sn.sonatel.mfdev.service.dto.AdminUserDTO;
 import sn.sonatel.mfdev.web.rest.errors.BadRequestAlertException;
@@ -72,7 +74,9 @@ public class UserResource {
             "createdBy",
             "createdDate",
             "lastModifiedBy",
-            "lastModifiedDate"
+            "lastModifiedDate",
+            "matricule",
+            "phoneNumber"
         )
     );
 
@@ -86,17 +90,19 @@ public class UserResource {
     private final UserRepository userRepository;
 
     private final MailService mailService;
+    private final ManagerService managerService;
 
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
+    public UserResource(UserService userService, UserRepository userRepository, MailService mailService, ManagerService managerService) {
         this.userService = userService;
         this.userRepository = userRepository;
         this.mailService = mailService;
+        this.managerService = managerService;
     }
 
     /**
      * {@code POST  /admin/users}  : Creates a new user.
      * <p>
-     * Creates a new user if the login and email are not already used, and sends an
+     * Creates a new user if the login and email are not already used, and sends a
      * mail with an activation link.
      * The user needs to be activated on creation.
      *
@@ -118,7 +124,8 @@ public class UserResource {
         } else if (userRepository.findOneByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
             throw new EmailAlreadyUsedException();
         } else {
-            User newUser = userService.createUser(userDTO);
+            userDTO.setLangKey("fr");
+            User newUser = userService.createUser(userDTO, new User());
             mailService.sendCreationEmail(newUser);
             return ResponseEntity
                 .created(new URI("/api/admin/users/" + newUser.getLogin()))
@@ -208,5 +215,29 @@ public class UserResource {
             .noContent()
             .headers(HeaderUtil.createAlert(applicationName, "A user is deleted with identifier " + login, login))
             .build();
+    }
+
+    /**
+     *
+     */
+    //    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    @PostMapping("/managers")
+    public ResponseEntity<Manager> createManager(@RequestBody AdminUserDTO manager) throws URISyntaxException {
+        //        System.out.println(manager.getPassword());
+        //        manager.setPassword("passer");
+        var newUser = managerService.saveManager(manager);
+        mailService.sendCreationEmail(newUser);
+        return ResponseEntity
+            .created(new URI("/api/admin/users/" + newUser.getLogin()))
+            .headers(
+                HeaderUtil.createAlert(applicationName, "An manager is created with identifier " + newUser.getLogin(), newUser.getLogin())
+            )
+            .body(newUser);
+    }
+
+    //    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    @GetMapping("/managers/{id}")
+    public ResponseEntity<Manager> getAManager(@PathVariable Long id) {
+        return ResponseEntity.ok().body(managerService.getManagerById(id));
     }
 }

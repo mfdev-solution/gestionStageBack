@@ -13,13 +13,15 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sn.sonatel.mfdev.config.Constants;
 import sn.sonatel.mfdev.domain.Authority;
 import sn.sonatel.mfdev.domain.User;
 import sn.sonatel.mfdev.repository.AuthorityRepository;
 import sn.sonatel.mfdev.repository.UserRepository;
 import sn.sonatel.mfdev.security.AuthoritiesConstants;
 import sn.sonatel.mfdev.security.SecurityUtils;
+import sn.sonatel.mfdev.service.Exceptions.EmailAlreadyUsedException;
+import sn.sonatel.mfdev.service.Exceptions.InvalidPasswordException;
+import sn.sonatel.mfdev.service.Exceptions.UsernameAlreadyUsedException;
 import sn.sonatel.mfdev.service.dto.AdminUserDTO;
 import sn.sonatel.mfdev.service.dto.UserDTO;
 import tech.jhipster.security.RandomUtil;
@@ -33,13 +35,13 @@ public class UserService {
 
     private final Logger log = LoggerFactory.getLogger(UserService.class);
 
-    private final UserRepository userRepository;
+    protected final UserRepository userRepository;
 
-    private final PasswordEncoder passwordEncoder;
+    protected final PasswordEncoder passwordEncoder;
 
-    private final AuthorityRepository authorityRepository;
+    protected final AuthorityRepository authorityRepository;
 
-    private final CacheManager cacheManager;
+    protected final CacheManager cacheManager;
 
     public UserService(
         UserRepository userRepository,
@@ -111,6 +113,8 @@ public class UserService {
                 }
             });
         User newUser = new User();
+        newUser.setLangKey("FR");
+
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(userDTO.getLogin().toLowerCase());
         // new user gets initially a generated password
@@ -121,7 +125,7 @@ public class UserService {
             newUser.setEmail(userDTO.getEmail().toLowerCase());
         }
         newUser.setImageUrl(userDTO.getImageUrl());
-        newUser.setLangKey(userDTO.getLangKey());
+        // newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
         newUser.setActivated(false);
         // new user gets registration key
@@ -145,24 +149,29 @@ public class UserService {
         return true;
     }
 
-    public User createUser(AdminUserDTO userDTO) {
-        User user = new User();
+    public User createUser(AdminUserDTO userDTO, User user) {
+        //        User user = new User();
         user.setLogin(userDTO.getLogin().toLowerCase());
         user.setFirstName(userDTO.getFirstName());
+        user.setMatricule(userDTO.getMatricule());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
+        user.setImageUrl(userDTO.getImageUrl());
         user.setLastName(userDTO.getLastName());
+        //        user.setStructure(userDTO.getStructure());
         if (userDTO.getEmail() != null) {
             user.setEmail(userDTO.getEmail().toLowerCase());
         }
         user.setImageUrl(userDTO.getImageUrl());
-        if (userDTO.getLangKey() == null) {
-            user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
-        } else {
-            user.setLangKey(userDTO.getLangKey());
-        }
+        //        if (userDTO.getLangKey() == null) {
+        //            user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
+        //        } else {
+        //            user.setLangKey(userDTO.getLangKey());
+        //        }
         String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
         user.setPassword(encryptedPassword);
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());
+        user.setLangKey("fr");
         user.setActivated(true);
         if (userDTO.getAuthorities() != null) {
             Set<Authority> authorities = userDTO
@@ -174,10 +183,10 @@ public class UserService {
                 .collect(Collectors.toSet());
             user.setAuthorities(authorities);
         }
-        userRepository.save(user);
-        this.clearUserCaches(user);
-        log.debug("Created Information for User: {}", user);
-        return user;
+        var addedUser = userRepository.save(user);
+        this.clearUserCaches(addedUser);
+        log.debug("Created Information for User: {}", addedUser);
+        return addedUser;
     }
 
     /**

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div>
+      <img style="height: 50px; width: 150px" src="/home/mfdev/Documents/codes/stage_2023/img_resources/LOGO_SONATEL.png" alt="jp.JPG " />
+    </div>
+    <div style="text-align: center">
+      <span>
+        CONTRAT DE STAGE PEDAGOGIQUE
+        <div>N° RE F : <span th:text="${contrat.id}" /></div>
+      </span>
+    </div>
+
+    <div>
+      ENTRE : <br />
+      SONATEL, société anonyme avec Conseil d’Administration au capital social de 50 milliards de F <br />
+      CFA, immatriculée au RCCM de Dakar sous le numéro SN.DKR 74 B 6z, ayant son siégé social au 6g <br />
+      , Voie de Dégagementt Nord (VDN) BP 6g a Dakar (Sénégal),dument représentée par Monsieur <br />
+      Sékou DRAME, agissant en qualité de Directeur Général de ladite société,
+    </div>
+    <br />
+    <br />
+    <div style="margin-left: 40%">
+      <span>
+        Ci-après dénommée « la SONATEL » <br />
+        D'une part,</span
+      >
+    </div>
+    <br />
+    <br />
+
+    <div>
+      <span>
+        ET <br />
+        Prénom et Nom : <span th:text=" ${intern.prenom} " /> <span th:text=" ${intern.nom} " /><br />
+        Sexe : &nbsp;&nbsp;&nbsp;<span th:text=" ${intern.genre} " /> <br />
+        Date et lieu de naissance :<span th:text=" ${dateNaissance} " /> à <span th:text="${intern.lieuNaissance}" /> <br />
+        N°CNI : <span th:text=" ${intern.cni} " /><br />
+        Nationalité :<span th:text=" ${intern.nationalite} " /> <br />
+        Adresse :<span th:text=" ${intern.adresse} " /> <br />
+        Formation en cours :<span th:text=" ${intern.formationEnCours} " /> <br />
+        Lieu d’affectation :<span th:text=" ${structure.nomStructure} " /><br />
+        Date début et fin de stage : <span th:text=" ${dateDebut} " /> au <span th:text=" ${dateFin} " />
+      </span>
+    </div>
+    <br />
+    <br />
+
+    <div style="margin-left: 40%">
+      <span>
+        Ci-après dénommée « le Stagiaire »
+
+        <br />
+        D’autre part.</span
+      >
+    </div>
+    <div style="text-align: left"><span> IL A ETE ARRETE ET CONVENU CE OUI SUIT : </span></div>
+    <br />
+    <div>
+      <span>
+        ARTICLE 1 : OBJET.
+        <br />
+        1.1. Le présent contrat a pour objet de contribuer a la formation pédagogique de
+        <span th:text="${intern.prenom}" />&nbsp;&nbsp;<span th:text="${intern.nom}" />, (ci-après « stagiaire pédagogique ») qui accepte
+        d'effectuer un Stage au sein de Sonatel.<br />
+
+        <br />1.2. Le stagiaire pédagogique a fourni, a titre de document attestant qu'il est en cours de formation, I 'attestation délivrée
+        par <span th:text="${intern.ecole}" /> et joint au présent contrat.<br />
+
+        <br />1.3. Le présent contrat est Un Stage pédagogique qui est exclu du champ d'application de la loi N°2015-04 du 12 Février 2015
+        sur le contrat de stage.<br />
+      </span>
+    </div>
+    <br />
+    <div>
+      <span>
+        ARTICLE 2 : STATUT
+        <br />
+        Pendant toute la durée du stage, le Stagiaire pédagogique ne pourra en aucun cas prétendre a un statut de travailleur au sens de I
+        ’article L.2 de la loi n°97- 17 du ver décembre 1997 portant Code du Travail.
+
+        <br /><br /><br /><br />
+        <img style="height: 80px; width: 130px" src="/home/mfdev/Documents/codes/stage_2023/img_resources/Logo_orange.png" alt="p.JPG" />
+        <br />
+        <br />
+        <br /><br /><br />
+        <br />
+        <img style="height: 50px; width: 150px" src="/home/mfdev/Documents/codes/stage_2023/img_resources/LOGO_SONATEL.png" alt="jp.JPG " />
+        <br />
+        Pendant toute la période de son stage le Stagiaire pédagogique doit se conformer aux usages et au Règlement Intérieur de
+        l'entreprise d’accueil notamment en ce qui concerne l’assiduité, le secret professionnel, le respect des instructions de son Maitre
+        de Stage et les horaires de travail.
+      </span>
+    </div>
+    <br />
+    <div>
+      <span>
+        ARTICLE 3 : DUREE ET PRISE D’EFFET.<br />
+        Le présent contrat de Stage pédagogique est conclu pour une durée déterminée de 03 mois allant La durée du présent contrat de Stage
+        est fixe. Elle peut être renouvelée à titre exceptionnel sur demande écrite du Directeur de l’Organisme de formation du stagiaire
+        pédagogique pour une durée égale ou différente, afin de lui permettre de finalises les travaux en cours.</span
+      >
+    </div>
+    <br />
+    <div>
+      <span>
+        ARTICLE 4 : MONTANT DE L’ALLOCATION DE STAGE <br />Le Stagiaire percevra une allocation mensuelle de 30000 FCFA. Cette somme ne peut
+        nullement être assimilée a une rémunération <span th:text="${contrat.remuneration}" />. Elle est laissée à la libre appréciation de
+        l'entreprise d’accueil et est considérée comme une simple libéralité sans aucun caractére obligatoire
+      </span>
+    </div>
+    <br />
+    <div>
+      <span>
+        ARTICLE 5 : PROTECTION SOCIALE<br />
+        Le stagiaire pédagogique est déclaré par I ’entreprise d'accueil au niveau de la Caisse de Sécurité Sociale. II bénéficie d’une
+        protection sociale en matière d'accidents de travail et de maladies professionnelles conformément aux dispositions de l'article 36
+        du code de sécurité Sociale. ,
+      </span>
+    </div>
+    <br />
+
+    <div>
+      <span>
+        ARTICLE 6 : CONFIDENTIALITE.<br />
+        Pendant toute la durée du présent contrat et au-delà de son expiration, le Stagiaire s’engage â considérer comme informations
+        confidentielles tout document, toute information et donnée, de quelque nature que ce soit et sous quelque forme que ce soit qui lui
+        aura été communiqué ou qu'il aura pris connaissance dans I 'exécution de ce Stage. II s'engagent par conséquent à ne pas les
+        divulguer ou communiquer a qui que ce soit.
+      </span>
+    </div>
+    <br />
+
+    <div>
+      <span>
+        ARTICLE 7 : RUPTURE.<br />
+        Le présent contrat de Stage prend normalement fin a l’arrivée du terme fixé par les parties. En cas de faute du stagiaire,
+        l’entreprise d'accueil se réserve le droit de mettre fin sans préavis au Stage après avoir prévenu le Stagiaire et éventuellement,
+        l'Organisme de Formation.A la fin du Stage, une attestation de Stage est délivrée au Stagiaire pédagogique.
+      </span>
+    </div>
+    <br />
+    <div style="font-weight: bold">
+      FAIT ET SIGNE A DAKAR LE <br />EN DEUX (z) EXEMPLAIRES DONT<br />
+      UN (1) A ETE REMIS A CHAOUE PARTIE<br />
+    </div>
+    <br />
+    <div style="margin-left: 25%"><span>POUR SONATEL </span> <span style="margin-left: 40%">POUR STAGIAIRE</span></div>
+
+    <br />
+    <br />
+    <div style="text-align: center">REF: <span th:text="${contrat.id}" /></div>
+    <br />
+    <div>
+      <img style="height: 90px; width: 150px" src="/home/mfdev/Documents/codes/stage_2023/img_resources/Logo_orange.png" alt="p.JPG" />
+    </div>
+  </body>
+</html>

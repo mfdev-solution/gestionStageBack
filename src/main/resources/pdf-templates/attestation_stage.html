@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    h1 {
+      text-align: center;
+      border: solid;
+      border-color: black;
+      border-radius: 0%;
+      padding: 1%;
+      display: inline-block;
+      background-color: rgba(153, 166, 185, 0.417);
+      margin: 3%;
+    }
+
+    h3 {
+      display: block;
+      font-size: 1.5em;
+      margin-block-start: 0px;
+      margin-block-end: 0px;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      font-weight: bold;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    p {
+      display: inline;
+      font-size: 1.5em;
+      margin-block-start: 0px;
+      margin-block-end: 0px;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      font-weight: normal;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+  </style>
+
+  <body>
+    <div style="margin-left: 10%; font-weight: bold; text-decoration: underline; font-size: small">
+      <h3>
+        DIRECTION DES RESSOURCES HUMAINES<br />
+        DEPARTEMENT DES RESSOURCES PARTAGES<br />
+        SERVICE GESTION DE LA WORFORCE <br />
+        TEMPORAIRE ET EXTERNALISEE
+      </h3>
+
+      <br />
+      <br />
+      <br />
+    </div>
+    <br />
+    <br />
+
+    <div style="display: flex; justify-content: center; font-weight: bold">N°Réf:</div>
+    <br />
+    <br />
+    <br />
+
+    <div style="display: flex; justify-content: center; padding-bottom: 70px">
+      <h1>ATTESTATION DE STAGE</h1>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+    </div>
+
+    <div style="margin-left: 10%; margin-right: 5%">
+      <p>
+        Je soussigné <span style="font-weight: bold"> Monsieur Mamadou Ibrahima TRAORE </span> , Directeur des Ressource Humaine de la
+        <span style="font-weight: bold"> SONATEL </span> ,atteste que Monsieur/Madame
+
+        <span th:text=" ${prenom} " />
+        <span th:text=" ${nom} " /> a effectué un stage à
+        <span style="font-weight: bold">
+          <span th:text=" ${direction} " />/ <span th:text=" ${departement} " />/ <span th:text=" ${service} "
+        /></span>
+        durant la periode du <span th:text=" ${dateDebut}  " /> au <spanp th:text=" ${dateFin}  " /><br />
+        <br />
+      </p>
+
+      <p>
+        En foi de quoi , cette présente attestation lui est delivrée pour servir et valoir ce que de droit <br />
+        <br />
+        <br />
+      </p>
+    </div>
+    <div style="margin-left: 50%; padding: 5%">
+      <p style="font-weight: bold; text-align: right">Fait à dakar le <span th:text="${date} " /></p>
+    </div>
+  </body>
+</html>

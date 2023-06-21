@@ -4,6 +4,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
 import org.apache.commons.lang3.StringUtils;
@@ -16,6 +17,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.core.env.Environment;
 import sn.sonatel.mfdev.config.ApplicationProperties;
 import sn.sonatel.mfdev.config.CRLFLogConverter;
+import sn.sonatel.mfdev.service.helps.DateFormater;
 import tech.jhipster.config.DefaultProfileUtil;
 import tech.jhipster.config.JHipsterConstants;
 
@@ -69,6 +71,7 @@ public class GestionStageApp {
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         logApplicationStartup(env);
+        //        System.out.println(DateFormater.formateDate(new Date()));
     }
 
     private static void logApplicationStartup(Environment env) {

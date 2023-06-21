@@ -1,4 +1,4 @@
-package sn.sonatel.mfdev.service;
+package sn.sonatel.mfdev.service.Exceptions;
 
 public class UsernameAlreadyUsedException extends RuntimeException {
 

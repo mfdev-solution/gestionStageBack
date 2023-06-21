@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <style>
+    h1{
+      color: brown;
+    }
+    .quotation {
+      width: 100%;
+    }
+    .quotation, .quotation th, .quotation td {
+      border: 1px solid brown;
+      border-collapse: collapse;
+    }
+    .quotation th {
+      background-color: brown;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Intern</h1>
+<table >
+  <tr>
+    <th>Intern</th>
+  </tr>
+  <tr>
+    <td th:text="'Intern last name: ' + ${intern.id}"></td>
+  </tr>
+  <tr>
+    <td th:text="'Intern last name: ' + ${intern.nom}"></td>
+  </tr>
+  <tr>
+    <td th:text="'Intern first Name: ' + ${intern.prenom}"></td>
+  </tr>
+  <!--    <tr>-->
+  <!--        <td th:text="'Address: ' + ${intern.address}"></td>-->
+  <!--    </tr>-->
+  <tr>
+    <td th:text="'Email: ' + ${intern.email}"></td>
+  </tr>
+  <tr>
+    <td th:text="'Phone: ' + ${intern.numeroTelephone}"></td>
+  </tr>
+  <tr>
+    <td th:text="'Phone: ' + ${structure.nomStructure}"></td>
+  </tr>
+</table>
+</body>
+</html>

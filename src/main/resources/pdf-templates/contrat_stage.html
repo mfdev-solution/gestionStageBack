@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    h1 {
+      text-align: center;
+      border: solid;
+      border-color: black;
+      border-radius: 0%;
+      padding: 1%;
+      display: inline-block;
+      background-color: rgba(153, 166, 185, 0.417);
+      margin: 3%;
+    }
+
+    h3 {
+      display: block;
+      font-size: 1.5em;
+      margin-block-start: auto;
+      margin-block-end: auto;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      font-weight: bold;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    p {
+      display: inline;
+      font-size: 1.5em;
+      margin-block-start: auto;
+      margin-block-end: auto;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      font-weight: normal;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    span {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-weight: bold;
+    }
+  </style>
+
+  <body>
+    <div style="margin-left: 10%">
+      <h3 th:text="'Direction ' + ${direction}" />
+      <h3 th:text="'Departement '+ ${departement}" />
+      <h3 th:text="'Service '+ ${service}" />
+      <br />
+      <br />
+      <br />
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div style="display: flex; justify-content: center">
+      <h1>ATTESTATION DE PRESENCE</h1>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div style="margin-left: 10%; margin-right: 5%">
+      <p>
+        Je sousigné(e) Monsieur/Madame
+        <span th:text=" ${nomManager} + '.'" />
+        <span th:text="'Chef du service ' + ${service}" /> atteste que Monsieur/Madame
+        <span th:text=" ${prenom} " />
+        <span th:text=" ${nom} " /> MLE <span th:text=" ${matricule} " /> a travaillé comme temporaire dans la structure durant la période
+        du <span th:text=" ${DateDebutMois}  " /> au <span th:text=" ${DateFinMois}  " />.<br />
+        <br />
+      </p>
+      <!-- <p th:text="'Je sousigne ' + ${manager} + '. Chef du service' + ${service}" />-->
+      <p>
+        En foi de quoi , cette présente attestation lui est delivrée pour servir et valoir ce que de droit. <br />
+        <br />
+        <br />
+        <br />
+      </p>
+    </div>
+    <div style="margin-left: 50%; padding: 5%">
+      <p style="font-weight: bold; text-align: right">Fait à dakar le <span th:text="${etablissement} " /></p>
+    </div>
+  </body>
+</html>

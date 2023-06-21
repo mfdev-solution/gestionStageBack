@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      h1 {
+        text-align: center;
+        border: solid #555555;
+        border-radius: 0%;
+        padding: 1%;
+        display: inline-block;
+        background-color: #cccccc;
+        /*margin: 3%;*/
+      }
+
+      h3 {
+        display: block;
+        font-size: 1.5em;
+        margin-block-start: auto;
+        margin-block-end: auto;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
+
+      p {
+        display: inline;
+        font-size: 1.5em;
+        margin-block-start: auto;
+        margin-block-end: auto;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: normal;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
+    </style>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div style="margin-left: 5%">
+      <h3 th:text="'Direction : ' + ${direction}" />
+
+      <h3 th:text="'Departement :  '+ ${departement}" />
+
+      <h3 th:text="'Service : '+ ${service}" />
+      <br />
+      <br />
+      <br />
+    </div>
+    <br />
+    <br />
+
+    <div style="display: flex; justify-content: center; margin-left: 15%">
+      <h1>ATTESTATION DE PRESENCE</h1>
+      <br />
+      <br />
+      <br />
+      <br />
+    </div>
+
+    <div style="margin-left: 5%; margin-right: 5%">
+      <p>
+        Je sousigne
+        <span th:text="${manager} + '.'" />
+        <span th:text="'Chef du service ' + ${service}" /> <br />
+        atteste que <span th:text="${m_mme}" />
+        <span th:text="${stagiaire}" />
+        <span th:text="${matricule}" /> a travaillé comme temporaire dans la structure durant la periode du
+        <span th:text=" ${dateDebut} " /> au <spanp th:text=" ${dateFin} " /><br />
+        <br />
+      </p>
+      <!-- <p th:text="'Je sousigne ' + ${manager} + '. Chef du service' + ${service}" />-->
+      <p>
+        En foi de quoi , cette presente attestation lui est delivrée pour servir et valoir ce que de droit <br />
+        <br />
+        <br />
+        <br />
+      </p>
+    </div>
+    <div style="margin-left: 45%; padding: 5%">
+      <p style="font-weight: bold; text-align: right">Fait a dakar le <span th:text="${attestation} " /></p>
+    </div>
+  </body>
+</html>

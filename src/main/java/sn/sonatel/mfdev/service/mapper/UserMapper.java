@@ -5,9 +5,10 @@ import java.util.stream.Collectors;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.mapstruct.control.MappingControl;
 import org.springframework.stereotype.Service;
-import sn.sonatel.mfdev.domain.Authority;
-import sn.sonatel.mfdev.domain.User;
+import sn.sonatel.mfdev.domain.*;
+import sn.sonatel.mfdev.service.ManagerService;
 import sn.sonatel.mfdev.service.dto.AdminUserDTO;
 import sn.sonatel.mfdev.service.dto.UserDTO;
 
@@ -44,18 +45,48 @@ public class UserMapper {
         if (userDTO == null) {
             return null;
         } else {
-            User user = new User();
-            user.setId(userDTO.getId());
-            user.setLogin(userDTO.getLogin());
-            user.setFirstName(userDTO.getFirstName());
-            user.setLastName(userDTO.getLastName());
-            user.setEmail(userDTO.getEmail());
-            user.setImageUrl(userDTO.getImageUrl());
-            user.setActivated(userDTO.isActivated());
-            user.setLangKey(userDTO.getLangKey());
-            Set<Authority> authorities = this.authoritiesFromStrings(userDTO.getAuthorities());
-            user.setAuthorities(authorities);
-            return user;
+            return shortConverter(userDTO, new User());
+        }
+    }
+
+    private User shortConverter(AdminUserDTO userDTO, User user) {
+        user.setId(userDTO.getId());
+        user.setLogin(userDTO.getLogin());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setEmail(userDTO.getEmail());
+        user.setImageUrl(userDTO.getImageUrl());
+        user.setActivated(userDTO.isActivated());
+        user.setLangKey(userDTO.getLangKey());
+        //            user.setStructure(userDTO.getStructure());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
+        user.setMatricule(userDTO.getMatricule());
+        Set<Authority> authorities = this.authoritiesFromStrings(userDTO.getAuthorities());
+        user.setAuthorities(authorities);
+        return user;
+    }
+
+    public Manager userDTOToManager(AdminUserDTO userDTO, Manager manager) {
+        if (userDTO == null) {
+            return null;
+        } else {
+            return (Manager) shortConverter(userDTO, manager);
+        }
+    }
+
+    public Gwte userDTOToGwte(AdminUserDTO userDTO, Gwte gwte) {
+        if (userDTO == null) {
+            return null;
+        } else {
+            return (Gwte) shortConverter(userDTO, gwte);
+        }
+    }
+
+    public Admin userDTOToAdmin(AdminUserDTO userDTO, Admin admin) {
+        if (userDTO == null) {
+            return null;
+        } else {
+            return (Admin) shortConverter(userDTO, admin);
         }
     }
 
