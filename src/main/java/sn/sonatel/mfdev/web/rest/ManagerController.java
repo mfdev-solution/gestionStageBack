@@ -1,18 +1,16 @@
 package sn.sonatel.mfdev.web.rest;
 
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import sn.sonatel.mfdev.domain.AttestationPresence;
-import sn.sonatel.mfdev.domain.ContratStage;
-import sn.sonatel.mfdev.domain.Manager;
-import sn.sonatel.mfdev.domain.Stagiaire;
+import sn.sonatel.mfdev.domain.*;
 import sn.sonatel.mfdev.repository.ContratStageRepository;
+import sn.sonatel.mfdev.repository.PaymentRepository;
 import sn.sonatel.mfdev.repository.UserRepository;
 import sn.sonatel.mfdev.security.AuthoritiesConstants;
-import sn.sonatel.mfdev.security.SecurityUtils;
 import sn.sonatel.mfdev.service.AttestationPresenceService;
 import sn.sonatel.mfdev.service.ManagerService;
 import sn.sonatel.mfdev.service.StagiaireService;
@@ -31,6 +29,7 @@ public class ManagerController {
     private final UserService userService;
     private final AttestationPresenceService attestationPresenceService;
     private final ContratStageRepository contratStageRepository;
+    private final PaymentRepository paymentRepository;
 
     public ManagerController(
         ManagerService managerService,
@@ -38,7 +37,8 @@ public class ManagerController {
         UserRepository userRepository,
         UserService userService,
         AttestationPresenceService attestationPresenceService,
-        ContratStageRepository contratStageRepository
+        ContratStageRepository contratStageRepository,
+        PaymentRepository paymentRepository
     ) {
         this.managerService = managerService;
         this.stagiaireService = stagiaireService;
@@ -46,6 +46,7 @@ public class ManagerController {
         this.userService = userService;
         this.attestationPresenceService = attestationPresenceService;
         this.contratStageRepository = contratStageRepository;
+        this.paymentRepository = paymentRepository;
     }
 
     @GetMapping

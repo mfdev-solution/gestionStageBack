@@ -7,17 +7,18 @@ import org.springframework.stereotype.Service;
 import sn.sonatel.mfdev.domain.AttestationPresence;
 import sn.sonatel.mfdev.domain.Payement;
 import sn.sonatel.mfdev.repository.AttestationPresenceRepository;
+import sn.sonatel.mfdev.repository.PaymentRepository;
 import sn.sonatel.mfdev.security.SecurityUtils;
 
 @Service
 public class AttestationPresenceService {
 
     private final AttestationPresenceRepository attesttionPresenceRepository;
-    private final PaymentService paymentService;
+    private final PaymentRepository paymentRepository;
 
-    public AttestationPresenceService(AttestationPresenceRepository attestationPresenceRepository, PaymentService paymentService) {
+    public AttestationPresenceService(AttestationPresenceRepository attestationPresenceRepository, PaymentRepository paymentRepository) {
         this.attesttionPresenceRepository = attestationPresenceRepository;
-        this.paymentService = paymentService;
+        this.paymentRepository = paymentRepository;
     }
 
     @Transactional
@@ -26,7 +27,7 @@ public class AttestationPresenceService {
         var payement = new Payement();
         payement.setAttestationPresence(attestation);
         payement.setPaied(false);
-        paymentService.addPayement(payement);
+        paymentRepository.save(payement);
         return attestation;
     }
 
@@ -45,5 +46,19 @@ public class AttestationPresenceService {
 
     public List<AttestationPresence> findAllStagiaire(Long id) {
         return attesttionPresenceRepository.findAllByContratStage_Stagiaire_Id(id);
+    }
+
+    public AttestationPresence updateAttestation(Long id, AttestationPresence attestationPresence) {
+        return attesttionPresenceRepository
+            .findById(id)
+            .map(attestationPresence1 -> {
+                attestationPresence1.setEtatAttestationPresence(attestationPresence.getEtatAttestationPresence());
+                attestationPresence1.setContratStage(attestationPresence.getContratStage());
+                attestationPresence1.setDateFin(attestationPresence.getDateFin());
+                attestationPresence1.setDateDebut(attestationPresence1.getDateDebut());
+                attestationPresence1.setGenerated(attestationPresence.isGenerated());
+                return attestationPresence1;
+            })
+            .orElseThrow();
     }
 }

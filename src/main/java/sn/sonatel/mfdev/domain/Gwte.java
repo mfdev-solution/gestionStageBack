@@ -21,4 +21,7 @@ public class Gwte extends User {
 
     @OneToMany(mappedBy = "gwte")
     private List<ContratStage> contratStageCollection;
+
+    @OneToMany(mappedBy = "gwte")
+    private Collection<Message> messages;
 }

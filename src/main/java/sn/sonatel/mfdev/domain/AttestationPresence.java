@@ -1,5 +1,6 @@
 package sn.sonatel.mfdev.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,4 +31,8 @@ public class AttestationPresence {
 
     @ManyToOne
     private ContratStage contratStage;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "attestationPresence")
+    private Payement payement;
 }

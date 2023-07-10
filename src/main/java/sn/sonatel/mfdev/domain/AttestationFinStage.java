@@ -13,15 +13,17 @@ import lombok.Setter;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Payement {
+public class AttestationFinStage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date datePaye;
-    private boolean paied = false;
+    private Date dateEtabli;
+
+    @Enumerated(EnumType.STRING)
+    private EtatAttestationFinStage etatAttestationFinStage = EtatAttestationFinStage.enCours;
 
     @OneToOne
-    private AttestationPresence attestationPresence;
+    private ContratStage contratStage;
 }

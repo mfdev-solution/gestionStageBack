@@ -31,6 +31,9 @@ public class Manager extends User {
     @OneToMany(mappedBy = "manager")
     private Collection<Stagiaire> stagiaireCollection;
 
+    @OneToMany(mappedBy = "manager")
+    private Collection<Message> message;
+
     public Manager(
         Long id,
         @NotNull @Pattern(regexp = Constants.LOGIN_REGEX) @Size(min = 1, max = 50) String login,

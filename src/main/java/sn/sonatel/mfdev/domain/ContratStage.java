@@ -1,5 +1,6 @@
 package sn.sonatel.mfdev.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.*;
@@ -43,4 +44,8 @@ public class ContratStage {
 
     @OneToMany(mappedBy = "contratStage")
     private Collection<AttestationPresence> attestationPresences;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "contratStage")
+    private AttestationFinStage attestationFinStage;
 }

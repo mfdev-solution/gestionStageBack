@@ -1,6 +1,5 @@
 package sn.sonatel.mfdev.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,15 +12,21 @@ import lombok.Setter;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Payement {
+@Table
+public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date datePaye;
-    private boolean paied = false;
+    private String contenu;
+    private Date dateSent;
+    private boolean isRead = false;
+    private String senderLogin;
 
-    @OneToOne
-    private AttestationPresence attestationPresence;
+    @ManyToOne
+    private Manager manager;
+
+    @ManyToOne
+    private Gwte gwte;
 }

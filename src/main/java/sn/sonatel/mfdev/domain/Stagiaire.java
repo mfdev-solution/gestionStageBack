@@ -59,5 +59,5 @@ public class Stagiaire {
     private Structure structure;
 
     @OneToMany(mappedBy = "stagiaire")
-    private List<ContratStage> contratStageList;
+    private List<ContratStage> contratStageList; //contratStage
 }
